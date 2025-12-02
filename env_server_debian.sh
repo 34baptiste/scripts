@@ -20,7 +20,7 @@ apt update && apt full-upgrade -y && apt autoremove --purge -y
 echo "=== Installation de OpenSSH Server ==="
 apt install -y openssh-server
 
-read -p "Voulez-vous changer le port SSH (défaut 22) ? (o/n) : " CHANGE_PORT
+read -p "Voulez-vous changer le port SSH (défaut 22) ? (o/n) : " CHANGE_PORT </dev/tty
 
 if [[ "$CHANGE_PORT" == "o" || "$CHANGE_PORT" == "O" ]]; then
     read -p "Entrez le nouveau port SSH : " SSH_PORT
@@ -49,11 +49,11 @@ ufw --force enable
 # Fixer l'adresse IP
 # ============================================================
 echo "=== Configuration IP statique ==="
-read -p "Nom de l'interface réseau (ex: enp0s3) : " IFACE
-read -p "Adresse IP souhaitée (ex: 192.168.1.50) : " IPADDR
-read -p "Masque réseau (ex: 255.255.255.0) : " NETMASK
-read -p "Passerelle (ex: 192.168.1.1) : " GATEWAY
-read -p "DNS (ex: 1.1.1.1 9.9.9.9) : " DNS
+read -p "Nom de l'interface réseau (ex: enp0s3) : " IFACE </dev/tty
+read -p "Adresse IP souhaitée (ex: 192.168.1.50) : " IPADDR </dev/tty
+read -p "Masque réseau (ex: 255.255.255.0) : " NETMASK </dev/tty
+read -p "Passerelle (ex: 192.168.1.1) : " GATEWAY </dev/tty
+read -p "DNS (ex: 1.1.1.1 9.9.9.9) : " DNS </dev/tty
 
 INTERFACES_FILE="/etc/network/interfaces"
 
@@ -79,7 +79,7 @@ systemctl restart networking || echo "Redémarrage du networking échoué (peut 
 # ============================================================
 echo "=== Ajout de l'utilisateur principal dans sudo ==="
 apt install -y sudo
-read -p "Nom de l'utilisateur principal : " MAINUSER
+read -p "Nom de l'utilisateur principal : " MAINUSER </dev/tty
 usermod -aG sudo "$MAINUSER"
 echo "Utilisateur $MAINUSER ajouté au groupe sudo."
 
