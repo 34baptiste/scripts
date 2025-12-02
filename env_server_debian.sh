@@ -23,7 +23,7 @@ apt install -y openssh-server
 read -p "Voulez-vous changer le port SSH (défaut 22) ? (o/n) : " CHANGE_PORT </dev/tty
 
 if [[ "$CHANGE_PORT" == "o" || "$CHANGE_PORT" == "O" ]]; then
-    read -p "Entrez le nouveau port SSH : " SSH_PORT
+    read -p "Entrez le nouveau port SSH : " SSH_PORT </dev/tty
 
     sed -i "s/#Port 22/Port $SSH_PORT/" /etc/ssh/sshd_config
     ufw allow "$SSH_PORT"/tcp
